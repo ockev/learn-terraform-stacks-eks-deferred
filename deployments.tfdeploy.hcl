@@ -27,10 +27,15 @@ deployment "production" {
   }
 }
 
-orchestrate {
-  only_if {
-    expression = last_deployment("development").status == "APPLIED"
-    reason     = "Do not begin any other deployments until Dev is successful."
+orchestrate "auto_approve" "prod_deploy_after_non_prod"  {
+  check {
+      conditions {
+        only_if {
+          # Only deploy Production if the latest Development run succeeded
+          expression = last_deployment("development").status == "APPLIED"
+          reason = "development deployment has not applied sucessfully"
+    }
+  }
   }
 }
 
