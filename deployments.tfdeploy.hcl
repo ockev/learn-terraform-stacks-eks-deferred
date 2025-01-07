@@ -29,7 +29,7 @@ deployment "production" {
 
 orchestrate "auto_approve" "prod_deploy_after_non_prod"  {
   check {
-        condition = last_deployment("development").status == "APPLIED"
+        condition = last_deployment("development").status == "APPLIED" && context.plan.deployment == deployment.development
         reason = "development deployment has not applied sucessfully"
     }
   }
