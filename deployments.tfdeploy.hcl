@@ -29,15 +29,10 @@ deployment "production" {
 
 orchestrate "auto_approve" "prod_deploy_after_non_prod"  {
   check {
-      condition {
-        only_if {
-          # Only deploy Production if the latest Development run succeeded
-          expression = last_deployment("development").status == "APPLIED"
-          reason = "development deployment has not applied sucessfully"
+        condition = last_deployment("development").status == "APPLIED"
+        reason = "development deployment has not applied sucessfully"
     }
   }
-  }
-}
 
 # orchestrate "auto_approve" "safe_plans_dev" {
 #  check {
