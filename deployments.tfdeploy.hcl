@@ -27,6 +27,12 @@ deployment "production" {
   }
 }
 
+orchestration {
+  only_if {
+    expression = last_deployment("development").status == "APPLIED"
+    reason     = "Do not begin any other deployments until Dev is successful."
+  }
+}
 
 # orchestrate "auto_approve" "safe_plans_dev" {
 #  check {
