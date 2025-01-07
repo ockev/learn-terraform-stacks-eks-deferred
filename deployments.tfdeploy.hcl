@@ -27,7 +27,7 @@ deployment "production" {
   }
 }
 
-orchestration {
+orchestrate {
   only_if {
     expression = last_deployment("development").status == "APPLIED"
     reason     = "Do not begin any other deployments until Dev is successful."
