@@ -27,12 +27,12 @@ deployment "production" {
   }
 }
 
-orchestrate "auto_approve" "prod_deploy_after_non_prod"  {
-  check {
-        condition = deployment.development == "APPLIED" && context.plan.deployment == deployment.production
-        reason = "development deployment has not applied sucessfully"
-    }
-  }
+# orchestrate "auto_approve" "prod_deploy_after_non_prod"  {
+#   check {
+#         condition = deployment.development == "APPLIED" && context.plan.deployment == deployment.production
+#         reason = "development deployment has not applied sucessfully"
+#     }
+#   }
 
 # orchestrate "auto_approve" "safe_plans_dev" {
 #  check {
